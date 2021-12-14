@@ -37,22 +37,6 @@ import java.io.Serializable;
  */
 public class Level extends Priority implements Serializable {
 
-    private static final String ALL_NAME = "ALL";
-
-    private static final String TRACE_NAME = "TRACE";
-
-    private static final String DEBUG_NAME = "DEBUG";
-
-    private static final String INFO_NAME = "INFO";
-
-    private static final String WARN_NAME = "WARN";
-
-    private static final String ERROR_NAME = "ERROR";
-
-    private static final String FATAL_NAME = "FATAL";
-
-    private static final String OFF_NAME = "OFF";
-
     /**
      * TRACE level integer value.
      * 
@@ -63,44 +47,44 @@ public class Level extends Priority implements Serializable {
     /**
      * The <code>OFF</code> has the highest possible rank and is intended to turn off logging.
      */
-    final static public Level OFF = new Level(OFF_INT, OFF_NAME, 0);
+    final static public Level OFF = new Level(OFF_INT, "OFF", 0);
 
     /**
      * The <code>FATAL</code> level designates very severe error events that will presumably lead the application to abort.
      */
-    final static public Level FATAL = new Level(FATAL_INT, FATAL_NAME, 0);
+    final static public Level FATAL = new Level(FATAL_INT, "FATAL", 0);
 
     /**
      * The <code>ERROR</code> level designates error events that might still allow the application to continue running.
      */
-    final static public Level ERROR = new Level(ERROR_INT, ERROR_NAME, 3);
+    final static public Level ERROR = new Level(ERROR_INT, "ERROR", 3);
 
     /**
      * The <code>WARN</code> level designates potentially harmful situations.
      */
-    final static public Level WARN = new Level(WARN_INT, WARN_NAME, 4);
+    final static public Level WARN = new Level(WARN_INT, "WARN", 4);
 
     /**
      * The <code>INFO</code> level designates informational messages that highlight the progress of the application at coarse-grained level.
      */
-    final static public Level INFO = new Level(INFO_INT, INFO_NAME, 6);
+    final static public Level INFO = new Level(INFO_INT, "INFO", 6);
 
     /**
      * The <code>DEBUG</code> Level designates fine-grained informational events that are most useful to debug an application.
      */
-    final static public Level DEBUG = new Level(DEBUG_INT, DEBUG_NAME, 7);
+    final static public Level DEBUG = new Level(DEBUG_INT, "DEBUG", 7);
 
     /**
      * The <code>TRACE</code> Level designates finer-grained informational events than the <code>DEBUG</code level.
      * 
      * @since 1.2.12
      */
-    public static final Level TRACE = new Level(TRACE_INT, TRACE_NAME, 7);
+    public static final Level TRACE = new Level(TRACE_INT, "TRACE", 7);
 
     /**
      * The <code>ALL</code> has the lowest possible rank and is intended to turn on all logging.
      */
-    final static public Level ALL = new Level(ALL_INT, ALL_NAME, 7);
+    final static public Level ALL = new Level(ALL_INT, "ALL", 7);
 
     /**
      * Serialization version id.
@@ -164,28 +148,28 @@ public class Level extends Priority implements Serializable {
         }
         String s = sArg.toUpperCase();
 
-        if (s.equals(ALL_NAME)) {
+        if (s.equals("ALL")) {
             return Level.ALL;
         }
-        if (s.equals(DEBUG_NAME)) {
+        if (s.equals("DEBUG")) {
             return Level.DEBUG;
         }
-        if (s.equals(INFO_NAME)) {
+        if (s.equals("INFO")) {
             return Level.INFO;
         }
-        if (s.equals(WARN_NAME)) {
+        if (s.equals("WARN")) {
             return Level.WARN;
         }
-        if (s.equals(ERROR_NAME)) {
+        if (s.equals("ERROR")) {
             return Level.ERROR;
         }
-        if (s.equals(FATAL_NAME)) {
+        if (s.equals("FATAL")) {
             return Level.FATAL;
         }
-        if (s.equals(OFF_NAME)) {
+        if (s.equals("OFF")) {
             return Level.OFF;
         }
-        if (s.equals(TRACE_NAME)) {
+        if (s.equals("TRACE")) {
             return Level.TRACE;
         }
         //
