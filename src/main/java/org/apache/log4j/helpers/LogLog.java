@@ -110,9 +110,8 @@ public class LogLog {
   void debug(String msg, Throwable t) {
     if(debugEnabled && !quietMode) {
       System.out.println(PREFIX+msg);
-      if(t != null) {
-        t.printStackTrace(System.out);
-    }
+      if(t != null)
+	t.printStackTrace(System.out);
     }
   }
   
@@ -125,9 +124,8 @@ public class LogLog {
   public
   static
   void error(String msg) {
-    if(quietMode) {
-        return;
-    }
+    if(quietMode)
+      return;
     System.err.println(ERR_PREFIX+msg);
   }  
 
@@ -139,9 +137,8 @@ public class LogLog {
   public
   static
   void error(String msg, Throwable t) {
-    if(quietMode) {
-        return;
-    }
+    if(quietMode)
+      return;
 
     System.err.println(ERR_PREFIX+msg);
     if(t != null) {
@@ -168,9 +165,8 @@ public class LogLog {
   public
   static
   void warn(String msg) {
-    if(quietMode) {
-        return;
-    }
+    if(quietMode)
+      return;
 
     System.err.println(WARN_PREFIX+msg);
   }  
@@ -182,9 +178,8 @@ public class LogLog {
   public
   static
   void warn(String msg, Throwable t) {
-    if(quietMode) {
-        return;
-    }
+    if(quietMode)
+      return;
 
     System.err.println(WARN_PREFIX+msg);
     if(t != null) {

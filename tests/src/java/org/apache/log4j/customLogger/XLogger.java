@@ -70,12 +70,10 @@ public class XLogger extends Logger implements OptionHandler {
      XLevel#LETHAL}.  */
   public
   void lethal(String message, Throwable t) { 
-    if(repository.isDisabled(XLevel.LETHAL_INT)) {
-        return;
-    }
-    if(XLevel.LETHAL.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, XLevel.LETHAL, message, t);
-    }
+    if(repository.isDisabled(XLevel.LETHAL_INT)) 
+      return;
+    if(XLevel.LETHAL.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, XLevel.LETHAL, message, t);
   }
 
   /**
@@ -83,12 +81,10 @@ public class XLogger extends Logger implements OptionHandler {
      XLevel#LETHAL}.  */
   public
   void lethal(String message) { 
-    if(repository.isDisabled(XLevel.LETHAL_INT)) {
-        return;
-    }
-    if(XLevel.LETHAL.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, XLevel.LETHAL, message, null);
-    }
+    if(repository.isDisabled(XLevel.LETHAL_INT)) 
+      return;
+    if(XLevel.LETHAL.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, XLevel.LETHAL, message, null);
   }
 
   static
@@ -119,12 +115,10 @@ public class XLogger extends Logger implements OptionHandler {
   */
   public
   void trace(String message, Throwable t) { 
-    if(repository.isDisabled(XLevel.TRACE_INT)) {
-        return;
-    }   
-    if(XLevel.TRACE.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, XLevel.TRACE, message, t);
-    }
+    if(repository.isDisabled(XLevel.TRACE_INT))
+      return;   
+    if(XLevel.TRACE.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, XLevel.TRACE, message, t);
   }
 
   /**
@@ -132,12 +126,10 @@ public class XLogger extends Logger implements OptionHandler {
   */
   public
   void trace(String message) { 
-    if(repository.isDisabled(XLevel.TRACE_INT)) {
-        return;
-    }   
-    if(XLevel.TRACE.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, XLevel.TRACE, message, null);
-    }
+    if(repository.isDisabled(XLevel.TRACE_INT))
+      return;   
+    if(XLevel.TRACE.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, XLevel.TRACE, message, null);
   }
 
 

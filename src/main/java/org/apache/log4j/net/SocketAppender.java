@@ -181,9 +181,8 @@ public class SocketAppender extends AppenderSkeleton {
    * #cleanUp} method.
    * */
   synchronized public void close() {
-    if(closed) {
-        return;
-    }
+    if(closed)
+      return;
 
     this.closed = true;
     if (advertiseViaMulticastDNS) {
@@ -217,9 +216,8 @@ public class SocketAppender extends AppenderSkeleton {
   }
 
   void connect(InetAddress address, int port) {
-    if(this.address == null) {
-        return;
-    }
+    if(this.address == null)
+      return;
     try {
       // First, close the previous connection if any.
       cleanUp();
@@ -243,9 +241,8 @@ public class SocketAppender extends AppenderSkeleton {
 
 
   public void append(LoggingEvent event) {
-    if(event == null) {
-        return;
-    }
+    if(event == null)
+      return;
 
     if(address==null) {
       errorHandler.error("No remote host is set for SocketAppender named \""+

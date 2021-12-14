@@ -93,11 +93,10 @@ public class LevelMatchFilter extends Filter {
     } 
 
     if(matchOccured) {  
-      if(this.acceptOnMatch) {
-        return Filter.ACCEPT;
-    } else {
-        return Filter.DENY;
-    }
+      if(this.acceptOnMatch)
+	  return Filter.ACCEPT;
+      else
+	  return Filter.DENY;
     } else {
       return Filter.NEUTRAL;
     }

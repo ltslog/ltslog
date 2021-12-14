@@ -38,9 +38,8 @@ public class TelnetAppenderTest extends TestCase {
         InputStream i = s.getInputStream();
         while (!Thread.interrupted()) {
           int c = i.read();
-          if (c == -1) {
+          if (c == -1)
             break;
-        }
           bo.write(c);
         }
         s.close();

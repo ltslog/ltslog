@@ -92,11 +92,10 @@ public class BoundedFIFOTestCase extends TestCase {
 	  assertEquals(bf.length(), max - k > 0 ? max - k : 0); 
 	  Object r = bf.get();
 	  //System.out.println("Got "+r);
-	  if(k >= size) {
-        assertNull(r);
-    } else {
-        assertEquals(r, e[k]);
-    }
+	  if(k >= size) 
+	    assertNull(r);
+	  else 
+	    assertEquals(r, e[k]);
 	}
       }
       //System.out.println("Passed size="+size);
@@ -208,16 +207,13 @@ public class BoundedFIFOTestCase extends TestCase {
 	  for(int r = 0; r < d; r++) {
 	  
 	    BoundedFIFO bf = new BoundedFIFO(size);
-	    for(int p0 = 0; p0 < i; p0++) {
-            bf.put(e[p0]);
-        }
+	    for(int p0 = 0; p0 < i; p0++)
+	      bf.put(e[p0]);
 
-	    for(int g = 0; g < d; g++) {
-            bf.get();
-        }	    
-	    for(int p1 = 0; p1 < r; p1++) {
-            bf.put(e[i+p1]);
-        }
+	    for(int g = 0; g < d; g++) 
+	      bf.get();	    
+	    for(int p1 = 0; p1 < r; p1++) 
+	      bf.put(e[i+p1]);
 	    
 
 	    

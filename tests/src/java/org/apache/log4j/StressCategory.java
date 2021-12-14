@@ -76,15 +76,14 @@ class StressCategory {
   // On each possible permutation call createLoop
   static
   void permute(int n) {
-    if(n == LENGTH) {
-        createLoop(0);
-    } else {
-        for(int i = n; i < LENGTH; i++) {
-        swap(names, n, i);
-        permute(n+1);
-        swap(names, n, i);	
-          }
-    }
+    if(n == LENGTH)
+      createLoop(0);
+    else
+      for(int i = n; i < LENGTH; i++) {
+	swap(names, n, i);
+	permute(n+1);
+	swap(names, n, i);	
+      }
   }
 
   static
@@ -113,9 +112,9 @@ class StressCategory {
     if(n == LENGTH) {  
       //System.out.println("..............Creating cat[]...........");
       for(int i = 0; i < LENGTH; i++) {
-	if(ct[i] == null) {
-        cat[i] = null;
-    } else {
+	if(ct[i] == null)
+	  cat[i] = null;
+	else {
 	  cat[i] = Logger.getLogger(ct[i].catstr);
 	  cat[i].setLevel(ct[i].level);
 	}
@@ -132,9 +131,7 @@ class StressCategory {
       ct[n]  = new CT(names[n], null);
       createLoop(n+1);  
       
-      int r = random.nextInt(); if(r < 0) {
-        r = -r;
-    }
+      int r = random.nextInt(); if(r < 0) r = -r;
       ct[n]  = new CT(names[n], level[r%5]);
       createLoop(n+1);
     }
@@ -163,24 +160,22 @@ class StressCategory {
   static
   void ctDump() {
     for(int j = 0; j < LENGTH; j++) {
-       if(ct[j] != null) {
-        System.out.println("ct [" + j + "] = ("+ct[j].catstr+"," + 
+       if(ct[j] != null) 
+	    System.out.println("ct [" + j + "] = ("+ct[j].catstr+"," + 
 			       ct[j].level + ")");
-    } else {
-        System.out.println("ct [" + j + "] = undefined");
-    }
+       else 
+	 System.out.println("ct [" + j + "] = undefined");
     }
   }
   
   static
   void catDump() {
     for(int j = 0; j < LENGTH; j++) {
-      if(cat[j] != null) {
-        System.out.println("cat[" + j + "] = (" + cat[j].name + "," +
-        		   cat[j].getLevel() + ")");
-    } else {
-        System.out.println("cat[" + j + "] = undefined");
-    } 
+      if(cat[j] != null)
+	System.out.println("cat[" + j + "] = (" + cat[j].name + "," +
+			   cat[j].getLevel() + ")");
+      else
+	System.out.println("cat[" + j + "] = undefined"); 
     }
   }
 
@@ -199,9 +194,8 @@ class StressCategory {
     CT localCT = ct[i];
 
     // Can't perform test if logger is not instantiated
-    if(localCT == null) {
-        return true;
-    }
+    if(localCT == null) 
+      return true;
     
     // find expected level
     Level expected = getExpectedPrioriy(localCT);
@@ -222,9 +216,8 @@ class StressCategory {
   static
   Level getExpectedPrioriy(CT ctParam) {
     Level level = ctParam.level;
-    if(level != null) {
-        return level;
-    }
+    if(level != null) 
+      return level;
 
     
     String catstr = ctParam.catstr;    
@@ -237,9 +230,8 @@ class StressCategory {
       for(int j = 0; j < LENGTH; j++) {	
 	if(ct[j] != null && substr.equals(ct[j].catstr)) {
 	  Level p = ct[j].level;
-	  if(p != null) {
-        return p;
-    }	  
+	  if(p != null) 
+	    return p;	  
 	}
       }
     }

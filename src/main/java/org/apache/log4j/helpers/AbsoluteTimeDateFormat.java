@@ -126,12 +126,10 @@ public class AbsoluteTimeDateFormat extends DateFormat {
     
 
     
-    if(millis < 100) {
-        sbuf.append('0');
-    }
-    if(millis < 10) {
-        sbuf.append('0');
-    }
+    if(millis < 100) 
+      sbuf.append('0');
+    if(millis < 10) 
+      sbuf.append('0');
     
     sbuf.append(millis);
     return sbuf;

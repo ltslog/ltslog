@@ -200,9 +200,8 @@ public class WriterAppender extends AppenderSkeleton {
   public
   synchronized
   void close() {
-    if(this.closed) {
-        return;
-    }
+    if(this.closed)
+      return;
     this.closed = true;
     writeFooter();
     reset();
@@ -371,9 +370,8 @@ public class WriterAppender extends AppenderSkeleton {
   void writeHeader() {
     if(layout != null) {
       String h = layout.getHeader();
-      if(h != null && this.qw != null) {
-        this.qw.write(h);
-    }
+      if(h != null && this.qw != null)
+	this.qw.write(h);
     }
   }
   

@@ -180,9 +180,8 @@ public class Category implements AppenderAttachable {
      @since 1.2 */
   public
   void assertLog(boolean assertion, String msg) {
-    if(!assertion) {
-        this.error(msg);
-    }
+    if(!assertion)
+      this.error(msg);
   }
 
 
@@ -255,9 +254,8 @@ public class Category implements AppenderAttachable {
     @param message the message object to log. */
   public
   void debug(Object message) {
-    if(repository.isDisabled(Level.DEBUG_INT)) {
-        return;
-    }
+    if(repository.isDisabled(Level.DEBUG_INT))
+      return;
     if(Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel())) {
       forcedLog(FQCN, Level.DEBUG, message, null);
     }
@@ -275,12 +273,10 @@ public class Category implements AppenderAttachable {
    @param t the exception to log, including its stack trace.  */
   public
   void debug(Object message, Throwable t) {
-    if(repository.isDisabled(Level.DEBUG_INT)) {
-        return;
-    }
-    if(Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.DEBUG, message, t);
-    }
+    if(repository.isDisabled(Level.DEBUG_INT))
+      return;
+    if(Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.DEBUG, message, t);
   }
 
   /**
@@ -303,12 +299,10 @@ public class Category implements AppenderAttachable {
     @param message the message object to log */
   public
   void error(Object message) {
-    if(repository.isDisabled(Level.ERROR_INT)) {
-        return;
-    }
-    if(Level.ERROR.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.ERROR, message, null);
-    }
+    if(repository.isDisabled(Level.ERROR_INT))
+      return;
+    if(Level.ERROR.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.ERROR, message, null);
   }
 
   /**
@@ -322,12 +316,10 @@ public class Category implements AppenderAttachable {
    @param t the exception to log, including its stack trace.  */
   public
   void error(Object message, Throwable t) {
-    if(repository.isDisabled(Level.ERROR_INT)) {
-        return;
-    }
-    if(Level.ERROR.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.ERROR, message, t);
-    }
+    if(repository.isDisabled(Level.ERROR_INT))
+      return;
+    if(Level.ERROR.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.ERROR, message, t);
 
   }
 
@@ -367,12 +359,10 @@ public class Category implements AppenderAttachable {
     @param message the message object to log */
   public
   void fatal(Object message) {
-    if(repository.isDisabled(Level.FATAL_INT)) {
-        return;
-    }
-    if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.FATAL, message, null);
-    }
+    if(repository.isDisabled(Level.FATAL_INT))
+      return;
+    if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.FATAL, message, null);
   }
 
   /**
@@ -386,12 +376,10 @@ public class Category implements AppenderAttachable {
    @param t the exception to log, including its stack trace.  */
   public
   void fatal(Object message, Throwable t) {
-    if(repository.isDisabled(Level.FATAL_INT)) {
-        return;
-    }
-    if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.FATAL, message, t);
-    }
+    if(repository.isDisabled(Level.FATAL_INT))
+      return;
+    if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.FATAL, message, t);
   }
 
 
@@ -421,11 +409,10 @@ public class Category implements AppenderAttachable {
   synchronized
   public
   Enumeration getAllAppenders() {
-    if(aai == null) {
-        return NullEnumeration.getInstance();
-    } else {
-        return aai.getAllAppenders();
-    }
+    if(aai == null)
+      return NullEnumeration.getInstance();
+    else
+      return aai.getAllAppenders();
   }
 
   /**
@@ -436,9 +423,8 @@ public class Category implements AppenderAttachable {
   synchronized
   public
   Appender getAppender(String name) {
-     if(aai == null || name == null) {
-        return null;
-    }
+     if(aai == null || name == null)
+      return null;
 
      return aai.getAppender(name);
   }
@@ -454,9 +440,8 @@ public class Category implements AppenderAttachable {
   public
   Level getEffectiveLevel() {
     for(Category c = this; c != null; c=c.parent) {
-      if(c.level != null) {
-        return c.level;
-    }
+      if(c.level != null)
+	return c.level;
     }
     return null; // If reached will cause an NullPointerException.
   }
@@ -469,9 +454,8 @@ public class Category implements AppenderAttachable {
   public
   Priority getChainedPriority() {
     for(Category c = this; c != null; c=c.parent) {
-      if(c.level != null) {
-        return c.level;
-    }
+      if(c.level != null)
+	return c.level;
     }
     return null; // If reached will cause an NullPointerException.
   }
@@ -617,9 +601,8 @@ public class Category implements AppenderAttachable {
   public
   ResourceBundle getResourceBundle() {
     for(Category c = this; c != null; c=c.parent) {
-      if(c.resourceBundle != null) {
-        return c.resourceBundle;
-    }
+      if(c.resourceBundle != null)
+	return c.resourceBundle;
     }
     // It might be the case that there is no resource bundle
     return null;
@@ -677,12 +660,10 @@ public class Category implements AppenderAttachable {
     @param message the message object to log */
   public
   void info(Object message) {
-    if(repository.isDisabled(Level.INFO_INT)) {
-        return;
-    }
-    if(Level.INFO.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.INFO, message, null);
-    }
+    if(repository.isDisabled(Level.INFO_INT))
+      return;
+    if(Level.INFO.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.INFO, message, null);
   }
 
   /**
@@ -696,12 +677,10 @@ public class Category implements AppenderAttachable {
    @param t the exception to log, including its stack trace.  */
   public
   void info(Object message, Throwable t) {
-    if(repository.isDisabled(Level.INFO_INT)) {
-        return;
-    }
-    if(Level.INFO.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.INFO, message, t);
-    }
+    if(repository.isDisabled(Level.INFO_INT))
+      return;
+    if(Level.INFO.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.INFO, message, t);
   }
 
   /**
@@ -709,9 +688,9 @@ public class Category implements AppenderAttachable {
    */
   public
   boolean isAttached(Appender appender) {
-    if(appender == null || aai == null) {
-        return false;
-    } else {
+    if(appender == null || aai == null)
+      return false;
+    else {
       return aai.isAttached(appender);
     }
   }
@@ -752,9 +731,8 @@ public class Category implements AppenderAttachable {
     *   */
   public
   boolean isDebugEnabled() {
-    if(repository.isDisabled( Level.DEBUG_INT)) {
-        return false;
-    }
+    if(repository.isDisabled( Level.DEBUG_INT))
+      return false;
     return Level.DEBUG.isGreaterOrEqual(this.getEffectiveLevel());
   }
 
@@ -768,9 +746,8 @@ public class Category implements AppenderAttachable {
   */
   public
   boolean isEnabledFor(Priority level) {
-    if(repository.isDisabled(level.level)) {
-        return false;
-    }
+    if(repository.isDisabled(level.level))
+      return false;
     return level.isGreaterOrEqual(this.getEffectiveLevel());
   }
 
@@ -783,9 +760,8 @@ public class Category implements AppenderAttachable {
   */
   public
   boolean isInfoEnabled() {
-    if(repository.isDisabled(Level.INFO_INT)) {
-        return false;
-    }
+    if(repository.isDisabled(Level.INFO_INT))
+      return false;
     return Level.INFO.isGreaterOrEqual(this.getEffectiveLevel());
   }
 
@@ -830,11 +806,10 @@ public class Category implements AppenderAttachable {
     if(priority.isGreaterOrEqual(this.getEffectiveLevel())) {
       String pattern = getResourceBundleString(key);
       String msg;
-      if(pattern == null) {
-        msg = key;
-    } else {
-        msg = java.text.MessageFormat.format(pattern, params);
-    }
+      if(pattern == null)
+	msg = key;
+      else
+	msg = java.text.MessageFormat.format(pattern, params);
       forcedLog(FQCN, priority, msg, t);
     }
   }
@@ -847,9 +822,8 @@ public class Category implements AppenderAttachable {
     if(repository.isDisabled(priority.level)) {
       return;
     }
-    if(priority.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, priority, message, t);
-    }
+    if(priority.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, priority, message, t);
   }
 
  /**
@@ -860,9 +834,8 @@ public class Category implements AppenderAttachable {
     if(repository.isDisabled(priority.level)) {
       return;
     }
-    if(priority.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, priority, message, null);
-    }
+    if(priority.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, priority, message, null);
   }
 
   /**
@@ -932,9 +905,8 @@ public class Category implements AppenderAttachable {
   synchronized
   public
   void removeAppender(Appender appender) {
-    if(appender == null || aai == null) {
-        return;
-    }
+    if(appender == null || aai == null)
+      return;
     boolean wasAttached = aai.isAttached(appender);
     aai.removeAppender(appender);
     if (wasAttached) {
@@ -950,9 +922,7 @@ public class Category implements AppenderAttachable {
   synchronized
   public
   void removeAppender(String name) {
-    if(name == null || aai == null) {
-        return;
-    }
+    if(name == null || aai == null) return;
     Appender appender = aai.getAppender(name);
     aai.removeAppender(name);
     if (appender != null) {
@@ -1066,13 +1036,11 @@ public class Category implements AppenderAttachable {
     @param message the message object to log.  */
   public
   void warn(Object message) {
-    if(repository.isDisabled( Level.WARN_INT)) {
-        return;
-    }
+    if(repository.isDisabled( Level.WARN_INT))
+      return;
 
-    if(Level.WARN.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.WARN, message, null);
-    }
+    if(Level.WARN.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.WARN, message, null);
   }
 
   /**
@@ -1086,11 +1054,9 @@ public class Category implements AppenderAttachable {
    @param t the exception to log, including its stack trace.  */
   public
   void warn(Object message, Throwable t) {
-    if(repository.isDisabled(Level.WARN_INT)) {
-        return;
-    }
-    if(Level.WARN.isGreaterOrEqual(this.getEffectiveLevel())) {
-        forcedLog(FQCN, Level.WARN, message, t);
-    }
+    if(repository.isDisabled(Level.WARN_INT))
+      return;
+    if(Level.WARN.isGreaterOrEqual(this.getEffectiveLevel()))
+      forcedLog(FQCN, Level.WARN, message, t);
   }
 }

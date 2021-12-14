@@ -98,9 +98,8 @@ public class ISO8601DateFormat extends AbsoluteTimeDateFormat {
       sbuf.append(month);
 
       int day = calendar.get(Calendar.DAY_OF_MONTH);
-      if(day < 10) {
-        sbuf.append('0');
-    }
+      if(day < 10)
+	sbuf.append('0');
       sbuf.append(day);
 
       sbuf.append(' ');
@@ -136,12 +135,10 @@ public class ISO8601DateFormat extends AbsoluteTimeDateFormat {
     }
 
 
-    if (millis < 100) {
-        sbuf.append('0');
-    }
-    if (millis < 10) {
-        sbuf.append('0');
-    }
+    if (millis < 100)
+      sbuf.append('0');
+    if (millis < 10)
+      sbuf.append('0');
 
     sbuf.append(millis);
     return sbuf;

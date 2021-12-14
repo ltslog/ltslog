@@ -60,11 +60,10 @@ public class Roller {
 
     BasicConfigurator.configure();
 
-    if(argv.length == 2) {
-        init(argv[0], argv[1]);
-    } else {
-        usage("Wrong number of arguments.");
-    }
+    if(argv.length == 2) 
+      init(argv[0], argv[1]);
+    else 
+      usage("Wrong number of arguments.");
     
     roll();
   }
