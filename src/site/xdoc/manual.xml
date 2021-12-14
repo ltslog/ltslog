@@ -432,8 +432,7 @@ for the <a href="apidocs/org/apache/log4j/ConsoleAppender.html">console</a>, <a
 href="apidocs/org/apache/log4j/FileAppender.html">files</a>, GUI
 components, <a
 href="apidocs/org/apache/log4j/net/SocketAppender.html">remote socket</a>
-servers,  <a
-href="apidocs/org/apache/log4j/net/JMSAppender.html">JMS</a>,
+servers, 
 
 <a href="apidocs/org/apache/log4j/nt/NTEventLogAppender.html"> NT
 Event Loggers</a>, and remote UNIX <a

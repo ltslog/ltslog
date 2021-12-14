@@ -395,13 +395,6 @@ target platform and specify -Dntdll_target=msbuild on the mvn command line.
           </execution>
         </executions>
       </plugin>
-      <!--
-        clirr:check will fail with NullPointerException
-        due to missing javax.jms.MessageListener,
-        however it will trigger download of supporting components
-        which can allow "ant clirr" to succeed.
-        Could possibly run on a JavaEE platform.
-       -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>clirr-maven-plugin</artifactId>
@@ -429,16 +422,11 @@ target platform and specify -Dntdll_target=msbuild on the mvn command line.
         <extensions>true</extensions>
         <configuration>
             <instructions>
-                <!-- omit chainsaw and LF5   -->
-                <Export-Package>!org.apache.log4j.lf5.*,
-                                !org.apache.log4j.chainsaw.*,
-                                org.apache.log4j.*;version=1.2.17;-noimport:=true</Export-Package>
+                <Export-Package>org.apache.log4j.*;version=1.2.17;-noimport:=true</Export-Package>
 		<!--  all other potential imports are covered by DynamicImport-Package earlier -->
 		<Import-Package>!javax.swing.*,
 				!com.ibm.uvm.tools.*,
 				!com.sun.jdmk.comm.*,
-				javax.jmdns.*;resolution:=optional,
-				javax.jms.*;resolution:=optional,
 				javax.mail.*;resolution:=optional,
                                 *</Import-Package>
                 <Bundle-DocURL>http://logging.apache.org/log4j/1.2</Bundle-DocURL>
@@ -560,14 +548,6 @@ target platform and specify -Dntdll_target=msbuild on the mvn command line.
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
-    <!--  the following dependency is not needed on JDK 1.5 and higher 
-    <dependency>
-      <groupId>com.sun.jmx</groupId>
-      <artifactId>jmxri</artifactId>
-      <version>1.2.1</version>
-      <optional>true</optional>
-    </dependency>
-    -->
     <dependency>
       <groupId>oro</groupId>
       <artifactId>oro</artifactId>
@@ -579,12 +559,6 @@ target platform and specify -Dntdll_target=msbuild on the mvn command line.
       <artifactId>junit</artifactId>
       <version>3.8.2</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.geronimo.specs</groupId>
-      <artifactId>geronimo-jms_1.1_spec</artifactId>
-      <version>1.0</version>
-      <optional>true</optional>
     </dependency>
  </dependencies>
   <distributionManagement>

@@ -94,10 +94,6 @@
 	  Activation Framework</a> package.
 	  </p>
 
-	  <p>The <code>org.apache.log4j.net.JMSAppender</code>
-	  requires the presence of the JMS API as well as JNDI.
-	  </p>
-
 	  <p>log4j test code relies on the <a href="http://www.junit.org">JUnit</a> testing framework.
 	  </p>
              </answer></faq>
@@ -128,7 +124,7 @@
 	  <p>log4j can direct its output to a file, the console,
 	  an <code>java.io.OutputStream</code>,
 	  <code>java.io.Writer</code>, a remote server using TCP, a
-	  remote Unix Syslog daemon, to a remote listener using JMS,
+	  remote Unix Syslog daemon,
 	  to the NT EventLog or even send e-mail.  </p>
 
 	  <p>log4j uses 6 levels, namely TRACE, DEBUG, INFO, WARN, ERROR and

@@ -30,11 +30,6 @@
               the Maven repository can provide all the dependencies.  -->
   <property name="m2_repo" location="${user.home}/.m2/repository"/>
   <property name="javamail.jar" location="${m2_repo}/javax/mail/mail/1.4.3/mail-1.4.3.jar"/>
-  <property name="geronimo-jms.jar"
-         value="${m2_repo}/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.0/geronimo-jms_1.1_spec-1.0.jar"/>
-  <available property="jms.jar" value="${geronimo-jms.jar}" file="${geronimo-jms.jar}"/>
-  <property name="jms.jar" location="${m2_repo}/javax/jms/jms/1.1/jms-1.1.jar"/>
-  <property name="jmx.jar" location="${m2_repo}/com/sun/jmx/jmxri/1.2.1/jmxri-1.2.1.jar"/>
 
 
   <!-- Read the system environment variables and stores them in properties, -->
@@ -120,9 +115,6 @@
     <pathelement location="${javamail.jar}"/>
     <pathelement location="${activation.jar}"/>
     <pathelement location="${jaxp.jaxp.jar}"/>
-    <pathelement location="${jms.jar}"/>
-    <pathelement location="${jmx.jar}"/>
-    <pathelement location="${jndi.jar}"/>
     <pathelement location="${javaee-api.jar}"/>
   </path>
 
@@ -162,44 +154,6 @@
   </target>
 
 
-  <target name="jmxCheck">
-    <condition property="jmx-present" value="true">
-        <and>
-            <available classname="javax.management.MBeanInfo"
-                       classpath="${jmx.jar}"/>
-            <available classname="com.sun.jdmk.comm.HtmlAdaptorServer">
-                <classpath>
-                    <pathelement location="${jmx.jar}"/>
-					<pathelement location="${javaee-api.jar}"/>
-                </classpath>
-            </available>
-        </and>
-    </condition>
-  </target>
-  <target name="jmx" depends="jmxCheck" if="jmx-present">
-    <echo message="JMX is present."/>
-  </target>
-
-
-  <target name="jmsCheck">
-    <available classname="javax.jms.Message" property="jms-present">
-      <classpath>
-		<pathelement location="${jms.jar}"/>
-		<pathelement location="${javaee-api.jar}"/>
-      </classpath>
-    </available>
-  </target>
-  <target name="jms" depends="jmsCheck" if="jms-present">
-    <echo message="JMS is present."/>
-  </target>
-
-  <target name="jndiCheck">
-    <available classname="javax.naming.Context" property="jndi-present"/>
-  </target>
-  <target name="jndi" depends="jndiCheck" if="jndi-present">
-    <echo message="JNDI is present."/>
-  </target>
-
   <target name="javamailCheck">
     <available classname="javax.mail.MessageAware" property="javamail-present">
       <classpath>
@@ -224,7 +178,7 @@
   </target>
 
   <target name="build" depends="init, build.core, build.examples, build.xml,
-                                build.javamail, build.jms, build.jmx"/>
+                                build.javamail"/>
 
   <target name="build.core" depends="init">
     <mkdir dir="${javac.dest}" />
@@ -237,10 +191,7 @@
                     **/doc-files/*,
                     ${stem}/xml/**,
                     ${stem}/test/serialization/**,
-                    ${stem}/net/SMTPAppender.java,
-                    ${stem}/net/JMS*.java,
-                    ${stem}/jmx/*.java,
-                    ${stem}/or/jms/*.java"
+                    ${stem}/net/SMTPAppender.java"
            target="${javac.target}"
            source="${javac.source}"
            includeAntRuntime="${javac.includeAntRuntime}"
@@ -250,11 +201,7 @@
            debug="on">
       <classpath refid="compile.classpath"/>
     </javac>
-    
-    <copy todir="${javac.dest}">
-      <fileset dir="${resource.source.dir}" includes="${stem}/lf5/**/*.properties"/>
-      <fileset dir="${resource.source.dir}" includes="${stem}/lf5/viewer/images/*"/>
-    </copy>
+   
 
   </target>
 
@@ -277,11 +224,6 @@
            </classpath>
     </javac>
     <rmic base="${javac.dest}" classname="examples.NumberCruncherServer"/>
-
-    <copy todir="${javac.dest}">
-      <fileset dir="." includes="examples/lf5/**/*.properties"/>
-      <fileset dir="." includes="examples/lf5/**/*.xml"/>
-   </copy>
 
   </target>
 
@@ -318,35 +260,6 @@
     </javac>
   </target>
 
-  <target name="build.jms" depends="init, jms, jndi" if="jms-present">
-    <javac srcdir="${java.source.dir}"
-           destdir="${javac.dest}"
-           includes="${stem}/net/JMS*.java, ${stem}/or/jms/*.java"
-           target="${javac.target}"
-           source="${javac.source}"
-           includeAntRuntime="${javac.includeAntRuntime}"
-           includeJavaRuntime="${javac.includeJavaRuntime}"
-           fork="${javac.fork}"
-           deprecation="${deprecation}">
-      <classpath refid="compile.classpath"/>
-    </javac>
-  </target>
-
- <target name="build.jmx" depends="init, jmx, jndi" if="jmx-present">
-    <javac srcdir="${java.source.dir}"
-           destdir="${javac.dest}"
-           includes="${stem}/jmx/*.java"
-           excludes="${stem}/jmx/T.java"
-           target="${javac.target}"
-           source="${javac.source}"
-           includeAntRuntime="${javac.includeAntRuntime}"
-           includeJavaRuntime="${javac.includeJavaRuntime}"
-           fork="${javac.fork}"
-           deprecation="${deprecation}">
-      <classpath refid="compile.classpath"/>
-    </javac>
-  </target>
-
     <target name="build.nt" depends="log4j.jar" description="Build NTEventLogAppender.dll">
          <mkdir dir="${dist.dir}/object"/>
          <ant antfile="src/ntdll/build.xml">
@@ -363,34 +276,6 @@
   <!-- ================================================================= -->
   <target name="clean" depends="init">
     <delete dir="${dist.dir}/" />
-  </target>
-
-  <!-- ================================================================= -->
-  <!-- Runs checkstyle. Available from http://checkstyle.sf.net          -->
-  <!-- ================================================================= -->
-  <target name="checkstyle" depends="init">
-    <taskdef resource="checkstyletask.properties"
-             classpath="${checkstyle.jar}"/>
-
-    <!-- by default checkstyle supports the Sun coding standard. -->
-    <checkstyle lcurlyMethod="nlow"
-                lcurlyOther="nlow"
-                lcurlyType="nlow"
-                maxMethodLen="500"
-                maxConstructorLen="500">
-      <fileset dir="src/java/org/apache/log4j/chainsaw" includes="**/*.java"/>
-    </checkstyle>
-  </target>
-
-  <!-- ================================================================= -->
-  <!-- Runs Chainsaw                                                     -->
-  <!-- ================================================================= -->
-
-  <target name="chainsaw" depends="build">
-    <!-- Need to fork to avoid problems -->
-    <java classname="org.apache.log4j.chainsaw.Main" fork="yes"
-          classpath="${javac.dest};${ant.home}/lib/crimson.jar">
-    </java>
   </target>
 
   <!-- ================================================================= -->
@@ -420,16 +305,10 @@
                    ${stem}/net/*.class,
                    ${stem}/jdbc/*.class,
                    ${stem}/varia/*.class,
-                   ${stem}/chainsaw/*.class,
-                   ${stem}/lf5/**/*.class,
-                   ${stem}/lf5/**/*.properties,
-                   ${stem}/lf5/**/*.gif,
                    ${stem}/nt/*.class,
                    ${stem}/xml/*.class,
-                   ${stem}/jmx/*.class,
                    ${stem}/or/*.class,
                    ${stem}/or/sax/*.class,
-                   ${stem}/or/jms/*.class,
                    ${stem}/config/*.class"
          excludes="**/UnitTest**">
 		<manifest>
@@ -479,18 +358,14 @@
              packagenames="org.apache.log4j,
                            org.apache.log4j.config,
                            org.apache.log4j.helpers,
-                           org.apache.log4j.jmx,
-                           org.apache.log4j.lf5,
                            org.apache.log4j.net,
                            org.apache.log4j.nt,
                            org.apache.log4j.or,
                            org.apache.log4j.jdbc,
                            org.apache.log4j.or.sax,
-                           org.apache.log4j.or.jms,
                            org.apache.log4j.performance,
                            org.apache.log4j.spi,
                            org.apache.log4j.varia,
-                           org.apache.log4j.chainsaw,
                            org.apache.log4j.xml,
                            org.apache.log4j.xml.examples"
              version="true"
@@ -575,13 +450,9 @@
 	       <mkdir dir="target/clirr/orig"/>
 	       <mkdir dir="target/clirr/new"/>
 	       <copy todir="target/clirr/orig">	       
-	       	    <fileset file="${jms.jar}"/>
-	       	    <fileset file="${jmx.jar}"/>
 				<fileset file="${reference.jar}"/>
 	       </copy>
 	       <copy todir="target/clirr/new">
-	       	    <fileset file="${jms.jar}"/>
-	       	    <fileset file="${jmx.jar}"/>
 	       	    <fileset dir="${jar.dest}" includes="${jar.filename}"/>
 	       </copy>
 	  	   <clirr failOnBinError="no" failOnSrcError="no">
@@ -698,14 +569,6 @@
                    classname="org.apache.log4j.xml.DOMConfigurator"
                    classpath="${jar.dest}/${jar.filename}"/>
         <fail unless="jaxp-found" message="JAXP was not found."/>
-        <available property="jmx-found"
-                   classname="org.apache.log4j.jmx.Agent"
-                   classpath="${jar.dest}/${jar.filename}"/>
-        <fail unless="jmx-found" message="JMX was not found."/>
-        <available property="jms-found"
-                   classname="org.apache.log4j.net.JMSAppender"
-                   classpath="${jar.dest}/${jar.filename}"/>
-        <fail unless="jms-found" message="JMS or JNDI was not found."/>
         <available property="javamail-found"
                    classname="org.apache.log4j.net.SMTPAppender"
                    classpath="${jar.dest}/${jar.filename}"/>
