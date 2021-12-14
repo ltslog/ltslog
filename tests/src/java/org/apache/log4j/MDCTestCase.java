@@ -18,6 +18,7 @@ package org.apache.log4j;
 
 import java.lang.ref.Reference;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import junit.framework.TestCase;
 
 /**
