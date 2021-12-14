@@ -53,7 +53,7 @@ public class XLevel extends Level {
   public
   static
   Level toLevel(String sArg) {
-    return toLevel(sArg, XLevel.TRACE);
+    return (Level) toLevel(sArg, XLevel.TRACE);
   }
 
 
@@ -72,7 +72,7 @@ public class XLevel extends Level {
       return XLevel.LETHAL;
     }
       
-    return Level.toLevel(sArg, defaultValue);    
+    return Level.toLevel(sArg, (Level) defaultValue);    
   }
 
 

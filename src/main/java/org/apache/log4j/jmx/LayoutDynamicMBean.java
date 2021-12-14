@@ -157,7 +157,7 @@ public class LayoutDynamicMBean extends AbstractDynamicMBean {
 
     if(operationName.equals("activateOptions") &&
                      layout instanceof OptionHandler) {
-      OptionHandler oh = layout;
+      OptionHandler oh = (OptionHandler) layout;
       oh.activateOptions();
       return "Options activated.";
     }
