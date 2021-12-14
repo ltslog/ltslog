@@ -57,45 +57,16 @@ public final class FormattingInfo {
   private final boolean leftAlign;
 
   /**
-   * Right truncation.
-   * @since 1.2.17
-   */
-  private final boolean rightTruncate;
-
-  /**
    * Creates new instance.
    * @param leftAlign left align if true.
    * @param minLength minimum length.
    * @param maxLength maximum length.
-   * @deprecated since 1.2.17
    */
   public FormattingInfo(
-    final boolean leftAlign, 
-    final int minLength, 
-    final int maxLength) {
+    final boolean leftAlign, final int minLength, final int maxLength) {
     this.leftAlign = leftAlign;
     this.minLength = minLength;
     this.maxLength = maxLength;
-    this.rightTruncate = false;
-  }
-
-  /**
-   * Creates new instance.
-   * @param leftAlign left align if true.
-   * @param rightTruncate right truncate if true.
-   * @param minLength minimum length.
-   * @param maxLength maximum length.
-   * @since 1.2.17
-   */
-  public FormattingInfo(
-    final boolean leftAlign, 
-    final boolean rightTruncate,
-    final int minLength, 
-    final int maxLength) {
-    this.leftAlign = leftAlign;
-    this.minLength = minLength;
-    this.maxLength = maxLength;
-    this.rightTruncate = rightTruncate;
   }
 
   /**
@@ -112,15 +83,6 @@ public final class FormattingInfo {
    */
   public boolean isLeftAligned() {
     return leftAlign;
-  }
-
-  /**
-   * Determine if right truncated.
-   * @return true if right truncated.
-   * @since 1.2.17
-   */
-  public boolean isRightTruncated() {
-    return rightTruncate;
   }
 
   /**
@@ -149,11 +111,7 @@ public final class FormattingInfo {
     final int rawLength = buffer.length() - fieldStart;
 
     if (rawLength > maxLength) {
-      if(rightTruncate) {
-         buffer.setLength(fieldStart + maxLength);
-      } else {
-         buffer.delete(fieldStart, buffer.length() - maxLength);
-      }
+      buffer.delete(fieldStart, buffer.length() - maxLength);
     } else if (rawLength < minLength) {
       if (leftAlign) {
         final int fieldEnd = buffer.length();
