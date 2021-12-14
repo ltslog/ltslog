@@ -309,15 +309,13 @@ import org.apache.log4j.spi.LoggingEvent;
 
    <p>By default the relevant information is output as is. However,
    with the aid of format modifiers it is possible to change the
-   minimum field width, the maximum field width, justification
-   and truncation.
+   minimum field width, the maximum field width and justification.
 
-   <p>The optional format modifier are placed between the percent sign
+   <p>The optional format modifier is placed between the percent sign
    and the conversion character.
 
-   <p>The <em>left justification flag</em>, the minus sign (-),
-   the <em>right truncation flag</em>, the exclamation mark (!),
-   or any combination appear first.  Followed by the
+   <p>The first optional format modifier is the <em>left justification
+   flag</em> which is just the minus (-) character. Then comes the
    optional <em>minimum field width</em> modifier. This is a decimal
    constant that represents the minimum number of characters to
    output. If the data item requires fewer characters, it is padded on
@@ -336,8 +334,7 @@ import org.apache.log4j.spi.LoggingEvent;
    example, it the maximum field width is eight and the data item is
    ten characters long, then the first two characters of the data item
    are dropped. This behavior deviates from the printf function in C
-   where truncation is done from the end. The <em>right truncation flag</em>,
-   described previously, will override this behavior.
+   where truncation is done from the end.
 
    <p>Below are various format modifier examples for the category
    conversion specifier.
@@ -370,15 +367,6 @@ import org.apache.log4j.spi.LoggingEvent;
    <td align=center>30</td>
 
    <td>Truncate from the beginning if the category name is longer than 30
-   characters.
-
-   <tr>
-   <td align=center>%!.30c</td>
-   <td align=center>NA</td>
-   <td align=center>none</td>
-   <td align=center>30</td>
-
-   <td>Truncate from the end if the category name is longer than 30
    characters.
 
    <tr>
