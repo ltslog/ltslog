@@ -22,6 +22,10 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import org.apache.log4j.FilteredObjectInputStream;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggerRepository;
@@ -53,8 +57,9 @@ public class SocketNode implements Runnable {
     this.socket = socket;
     this.hierarchy = hierarchy;
     try {
-      ois = new ObjectInputStream(
-                         new BufferedInputStream(socket.getInputStream()));
+      ois = new FilteredObjectInputStream(
+                         new BufferedInputStream(socket.getInputStream()),
+                         getAllowedClasses());
     } catch(InterruptedIOException e) {
       Thread.currentThread().interrupt();
       logger.error("Could not open ObjectInputStream to "+socket, e);
@@ -63,6 +68,14 @@ public class SocketNode implements Runnable {
     } catch(RuntimeException e) {
       logger.error("Could not open ObjectInputStream to "+socket, e);
     }
+  }
+
+  private Collection getAllowedClasses() {
+      Collection allowedClasses = new ArrayList();
+      String property = System.getProperty("org.apache.log4j.net.allowedClasses");
+      if (property != null)
+          allowedClasses.addAll(Arrays.asList(property.split(",")));
+      return allowedClasses;
   }
 
   //public
