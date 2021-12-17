@@ -5,6 +5,10 @@ Long Term Support version of a stripped down Log4j
 ltslog is based on Log4j version 1.2.17.redhat.3.  As of 2021-12-16, it fixes all known security issues. 
 In order to reduce the attackable surfaces, it removes features, that are not widely used.
 
+Please report security issue via email to ltslog at arianne-project.org privatly. The Github issue trackker is public.
+
+This is a long term support project. Security issues will be addressed in a timely manner. But there will be no new features. Please use a modern logging framework instead.
+
 
 ## Changes 1.2.18 - released on 2021-12-16
 
