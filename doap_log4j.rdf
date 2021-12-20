@@ -25,27 +25,20 @@
   <Project rdf:about="http://logging.apache.org/log4j">
     <created>2007-02-09</created>
     <license rdf:resource="http://usefulinc.com/doap/licenses/asl20" />
-    <name>Apache log4j</name>
+    <name>ltslog</name>
     <homepage rdf:resource="http://logging.apache.org/log4j" />
-    <asfext:pmc rdf:resource="http://logging.apache.org" />
-    <shortdesc>Apache log4j provides logging services for Java.</shortdesc>
-    <bug-database rdf:resource="http://issues.apache.org/bugzilla" />
-    <mailing-list rdf:resource="http://logging.apache.org/log4j/1.2/mail-lists.html" />
-    <download-page rdf:resource="http://logging.apache.org/log4j/1.2/download.html" />
+    <asfext:pmc rdf:resource="https://github.com/ltslog/ltslog" />
+    <shortdesc>Long Term Support version of a stripped down log4j </shortdesc>
+    <bug-database rdf:resource="https://github.com/ltslog/ltslog/issues" />
+    <download-page rdf:resource="https://github.com/ltslog/ltslog/releases" />
     <programming-language>Java</programming-language>
     <category rdf:resource="http://projects.apache.org/category/library" />
     <release>
       <Version>
-        <name>Apache log4j 1.2.17</name>
-        <created>2012-05-06</created>
-        <revision>1.2.17</revision>
+        <name>ltslog 1.2.18</name>
+        <created>2012-12-16</created>
+        <revision>1.2.18</revision>
       </Version>
     </release>
-    <repository>
-      <SVNRepository>
-        <location rdf:resource="http://svn.apache.org/repos/asf/logging/log4j/trunk/"/>
-        <browse rdf:resource="http://svn.apache.org/viewvc/logging/log4j/trunk/"/>
-      </SVNRepository>
-    </repository>
   </Project>
 </rdf:RDF>
