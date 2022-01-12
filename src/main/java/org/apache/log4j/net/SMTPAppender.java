@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -69,7 +69,7 @@ import java.util.Properties;
    property with an instance of TriggeringEventEvaluator or
    nesting a triggeringPolicy element where the specified
    class implements TriggeringEventEvaluator.
-   
+
    This class has implemented UnrecognizedElementHandler since 1.2.15.
 
    Since 1.2.16, SMTP over SSL is supported by setting SMTPProtocol to "smpts".
@@ -82,11 +82,11 @@ public class SMTPAppender extends AppenderSkeleton
   /**
    * Comma separated list of cc recipients.
    */
-  private String cc;  
+  private String cc;
   /**
    * Comma separated list of bcc recipients.
    */
-  private String bcc;  
+  private String bcc;
   private String from;
   /**
    * Comma separated list of replyTo addresses.
@@ -132,7 +132,7 @@ public class SMTPAppender extends AppenderSkeleton
   /**
      Activate the specified options, such as the smtp host, the
      recipient, from, etc. */
-  public
+public
   void activateOptions() {
     Session session = createSession();
     msg = new MimeMessage(session);
@@ -154,11 +154,11 @@ public class SMTPAppender extends AppenderSkeleton
          ((OptionHandler) evaluator).activateOptions();
      }
   }
-  
+
   /**
    *   Address message.
    *   @param msg message, may not be null.
-   *   @throws MessagingException thrown if error addressing message. 
+   *   @throws MessagingException thrown if error addressing message.
    *   @since 1.2.14
    */
   protected void addressMessage(final Message msg) throws MessagingException {
@@ -187,7 +187,7 @@ public class SMTPAppender extends AppenderSkeleton
 		msg.setRecipients(Message.RecipientType.BCC, parseAddress(bcc));
 	  }
   }
-  
+
   /**
    *  Create mail session.
    *  @return mail session, may not be null.
@@ -212,7 +212,7 @@ public class SMTPAppender extends AppenderSkeleton
     if (smtpPort > 0) {
         props.put(prefix + ".port", String.valueOf(smtpPort));
     }
-    
+
     Authenticator auth = null;
     if(smtpPassword != null && smtpUsername != null) {
       props.put(prefix + ".auth", "true");
@@ -222,6 +222,7 @@ public class SMTPAppender extends AppenderSkeleton
         }
       };
     }
+    props.put("mail.smtps.ssl.checkserveridentity", "true");
     Session session = Session.getInstance(props, auth);
     if (smtpProtocol != null) {
         session.setProtocolForAddress("rfc822", smtpProtocol);
@@ -236,7 +237,7 @@ public class SMTPAppender extends AppenderSkeleton
      Perform SMTPAppender specific appending actions, mainly adding
      the event to a cyclic buffer and checking if the event triggers
      an e-mail to be sent. */
-  public
+public
   void append(LoggingEvent event) {
 
     if(!checkEntryConditions()) {
@@ -285,7 +286,7 @@ public class SMTPAppender extends AppenderSkeleton
   }
 
 
-  synchronized
+synchronized
   public
   void close() {
     this.closed = true;
@@ -326,24 +327,26 @@ public class SMTPAppender extends AppenderSkeleton
   /**
      The <code>SMTPAppender</code> requires a {@link
      org.apache.log4j.Layout layout}.  */
-  public
+  @Override
+public
   boolean requiresLayout() {
     return true;
   }
 
   /**
    * Layout body of email message.
-   * @since 1.2.16  
+   * @since 1.2.16
    */
   protected String formatBody() {
-	  
+
 	  // Note: this code already owns the monitor for this
 	  // appender. This frees us from needing to synchronize on 'cb'.
-	  
+
       StringBuffer sbuf = new StringBuffer();
       String t = layout.getHeader();
-      if(t != null)
-	sbuf.append(t);
+      if(t != null) {
+        sbuf.append(t);
+    }
       int len =  cb.length();
       for(int i = 0; i < len; i++) {
 	//sbuf.append(MimeUtility.encodeText(layout.format(cb.get())));
@@ -363,10 +366,10 @@ public class SMTPAppender extends AppenderSkeleton
       if(t != null) {
 	    sbuf.append(t);
       }
-      
+
       return sbuf.toString();
   }
-  
+
   /**
      Send the contents of the cyclic buffer as an e-mail message.
    */
@@ -575,7 +578,7 @@ public class SMTPAppender extends AppenderSkeleton
   boolean getLocationInfo() {
     return locationInfo;
   }
-  
+
    /**
       Set the cc recipient addresses.
       @param addresses recipient addresses as comma separated string, may be null.
@@ -621,7 +624,7 @@ public class SMTPAppender extends AppenderSkeleton
   public void setSMTPPassword(final String password) {
     this.smtpPassword = password;
   }
- 
+
   /**
    * The <b>SmtpUsername</b> option takes a string value which should be the username required to authenticate against
    * the mail server.
@@ -642,7 +645,7 @@ public class SMTPAppender extends AppenderSkeleton
   public void setSMTPDebug(final boolean debug) {
     this.smtpDebug = debug;
   }
-  
+
   /**
    * Get SMTP password.
    * @return SMTP password, may be null.
@@ -651,7 +654,7 @@ public class SMTPAppender extends AppenderSkeleton
   public String getSMTPPassword() {
     return smtpPassword;
   }
- 
+
   /**
    * Get SMTP user name.
    * @return SMTP user name, may be null.
@@ -692,9 +695,9 @@ public class SMTPAppender extends AppenderSkeleton
   }
 
   /** {@inheritDoc}
-   * @since 1.2.15 
+   * @since 1.2.15
   */
-  public boolean parseUnrecognizedElement(final Element element,
+public boolean parseUnrecognizedElement(final Element element,
                                           final Properties props) throws Exception {
       if ("triggeringPolicy".equals(element.getNodeName())) {
           Object triggerPolicy =
@@ -780,7 +783,7 @@ class DefaultEvaluator implements TriggeringEventEvaluator {
      <p>This method returns <code>true</code>, if the event level
      has ERROR level or higher. Otherwise it returns
      <code>false</code>. */
-  public
+public
   boolean isTriggeringEvent(LoggingEvent event) {
     return event.getLevel().isGreaterOrEqual(Level.ERROR);
   }
