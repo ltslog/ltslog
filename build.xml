@@ -36,7 +36,7 @@
   <!-- prefixed with "env". -->
   <property environment="env"/>
 
-  <property name="version" value="1.2.18"/>
+  <property name="version" value="1.2.19"/>
 
   <!-- The base directory relative to which most targets are built -->
   <property name="base" value="."/>
@@ -67,8 +67,8 @@
   <property name="jar.dest" value="${dist.dir}/lib"/>
 
   <!-- The jar file that the jar task will generate -->
-  <property name="jar.filename" value="log4j-${version}.jar"/>
-  <property name="sources-jar.filename" value="log4j-${version}-sources.jar"/>
+  <property name="jar.filename" value="log4j-lts-${version}.jar"/>
+  <property name="sources-jar.filename" value="log4j-lts-${version}-sources.jar"/>
 
   <!-- Destination for documentation files -->
   <property name="docs.dest" value="./docs"/>
