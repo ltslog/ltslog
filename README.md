@@ -17,8 +17,8 @@ This is a long term support project. Security issues will be addressed in a time
 ## Changes 1.2.18 - released on 2021-12-16
 
 - Minimum Java version is 8
-- [CVE-2021-4104](https://nvd.nist.gov/vuln/detail/CVE-2021-4104): removed JMSAppender (which was vulnerable to an JNDI based exploit in the configuration - as hinted by in the Log4j2-issue)
-- removed JDBCAppender
+- [CVE-2021-4104](https://nvd.nist.gov/vuln/detail/CVE-2021-4104), [CVE-2022-23302](https://nvd.nist.gov/vuln/detail/CVE-2022-23302): removed JMSAppender
+- [CVE-2022-23305](https://nvd.nist.gov/vuln/detail/CVE-2022-23305) removed JDBCAppender
 - [CVE-2017-5645](https://nvd.nist.gov/vuln/detail/CVE-2017-5645) and [CVE-2019-17571](https://nvd.nist.gov/vuln/detail/CVE-2019-17571): removed ServerSocket (which accepted log messages from other applications via a network connection)
-- removed Chainsaw (a log viewer application)
+- [CVE-2022-23307](https://nvd.nist.gov/vuln/detail/CVE-2022-23307) removed Chainsaw (a log viewer application)
 - removed Log Factor 5 (a log viewer application)
