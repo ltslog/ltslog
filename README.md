@@ -3,7 +3,8 @@ Long Term Support version of a stripped down Log4j
 
 
 ltslog is based on Log4j version 1.2.17.redhat.3.  As of 2021-01-12, it fixes all known security issues. 
-In order to reduce the attackable surfaces, it removes features, that are not widely used.
+In order to reduce the attackable surfaces, it removes features, that are not widely used. If you need a full featured drop-in replacement, please have a look at  
+[reload4j](https://reload4j.qos.ch/) by the original log4j author ceki.
 
 Please report security issue via email to ltslog at arianne-project.org privatly. The Github issue trackker is public.
 
