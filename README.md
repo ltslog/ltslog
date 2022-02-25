@@ -10,7 +10,7 @@ Please report security issue via email to ltslog at arianne-project.org privatly
 
 This is a long term support project. Security issues will be addressed in a timely manner. But there will be no new features. Please use a modern logging framework instead.
 
-## Changes 1.2.19 - released on 2021-01-12
+## Changes 1.2.19 - released on 2022-01-12
 
 - [CVE-2020-9488](https://nvd.nist.gov/vuln/detail/CVE-2020-9488) - SMTPAppender now checks hostname of SSL certificate
 - updated Maven dependencies of javax.mail to 1.6.2
